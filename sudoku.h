@@ -1,6 +1,7 @@
 #ifndef SUDOKU_H
 #define SUDOKU_H
 #include <iostream>
+#include <cstdio>
 using namespace std;
 #define NUM_SUDOKU 81
 /***************************************************
@@ -14,7 +15,7 @@ public:
     Sudoku();
     int _sudoku[NUM_SUDOKU];
     // generate
-    static Sudoku generate();
+    void generate();
 
     // transform
     void swapNum(int x, int y);

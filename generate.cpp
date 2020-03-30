@@ -1,9 +1,8 @@
-#include"sudoku.h"
-#include<iostream>
+#include "sudoku.h"
+#include <iostream>
 int main()
 {
-    Sudoku::generate();
-    
-
+    Sudoku sudokuGen;
+    sudokuGen.generate();
     return 0;
 }
