@@ -18,6 +18,8 @@ public:
     void generate();
 
     // transform
+    void input_Sudoku_table();
+
     void swapNum(int x, int y);
     void swapRow(int x, int y);
     void swapCol(int x, int y);

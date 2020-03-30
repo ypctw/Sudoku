@@ -28,3 +28,10 @@ void Sudoku::generate()
     }
 }
 
+void Sudoku::input_Sudoku_table(){
+for (int i = 0; i < 9; i++)
+    {
+        int k = i * 9;
+        cin >> _sudoku[k] >>_sudoku[k+1] >>_sudoku[k+2] >>_sudoku[k+3] >>_sudoku[k+4] >>_sudoku[k+5] >>_sudoku[k+6] >>_sudoku[k+7]>>_sudoku[k+8];
+    }
+}

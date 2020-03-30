@@ -1,6 +1,9 @@
+#include "sudoku.h"
+
 int main()
 {
-    // finish your transform code...
-
+    Sudoku sudokuTrans;
+    sudokuTrans.input_Sudoku_table();
+           
     return 0;
 }
