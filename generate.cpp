@@ -1,6 +1,9 @@
+#include"sudoku.h"
+#include<iostream>
 int main()
 {
-    // finish your generate code...
+    Sudoku::generate();
+    
 
     return 0;
 }
