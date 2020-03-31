@@ -42,9 +42,11 @@ void Sudoku::transform()
     int judge[3];
     while (1)
     {
-        cin >> judge[0] >> judge[1] >> judge[2];
+        cin >> judge[0];
+        /* >> judge[1] >> judge[2];
         int x = judge[1];
         int y = judge[2];
+        */
         if (judge[0] == 0)
         {
             for (int n = 0; n < NUM_SUDOKU; n++)
@@ -57,19 +59,24 @@ void Sudoku::transform()
         switch (judge[0])
         {
         case 1:
-            Sudoku::swapNum(x, y);
+            cin >> judge[1] >> judge[2];
+            Sudoku::swapNum(judge[1], judge[2]);
             break;
         case 2:
-            Sudoku::swapRow(x, y);
+            cin >> judge[1] >> judge[2];
+            Sudoku::swapRow(judge[1] , judge[2];
             break;
         case 3:
-            Sudoku::swapCol(x, y);
+            cin >> judge[1] >> judge[2];
+            Sudoku::swapCol(judge[1] , judge[2]);
             break;
         case 4:
-            Sudoku::rotate(x);
+            cin >> judge[1];
+            Sudoku::rotate(judge[1]);
             break;
         case 5:
-            Sudoku::flip(x);
+            cin >> judge[1];
+            Sudoku::flip(judge[1]);
             break;
         default:
             break;
