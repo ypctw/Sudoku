@@ -87,8 +87,7 @@ void Sudoku::transform()
         default:
             break;
         }
-        for (int tem = 0; tem < NUM_SUDOKU; tem++)
-            Sudoku::move_from_temp();
+        move_from_temp();
     }
     return;
 }
@@ -107,7 +106,6 @@ void Sudoku::swapNum(int x, int y)
 
 void Sudoku::swapRow(int x, int y)
 {
-    int temp;
     for (int sR = 0; sR < 9; sR++)
     {
         _temp_sudoku[x + 9 * sR] = _sudoku[y + 9 * sR];
@@ -118,11 +116,10 @@ void Sudoku::swapRow(int x, int y)
 
 void Sudoku::swapCol(int x, int y)
 {
-    int temp;
     for (int sC = 0; sC < 9; sC++)
     {
-        _temp_sudoku[x + sC] = _sudoku[x + 9 * y];
-        _temp_sudoku[x + 9 * y] = _sudoku[x + sC];
+        _temp_sudoku[x + sC] = _sudoku[x + sC + 9 * y];
+        _temp_sudoku[x + sC + 9 * y] = _sudoku[x + sC];
     }
     return;
 }
