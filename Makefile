@@ -5,7 +5,7 @@ transform:transform.o sudoku.o
 	g++ -o transform generate.o sudoku.o
 
 solve:solve.o sudoku.o
-	g++ -o solve solve.o sudoku.o
+	g++ -O3 -o solve solve.o sudoku.o
 
 sudoku.o:sudoku.cpp sudoku.h
 	g++ -c sudoku.cpp
@@ -17,7 +17,7 @@ transform.o:transform.cpp sudoku.h
 	g++ -c transform.cpp
 
 solve.o:solve.cpp sudoku.h
-	g++ -c solve.cpp
+	g++ -O3 -c solve.cpp
 
 clean:
 	rm *.o

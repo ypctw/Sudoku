@@ -70,7 +70,7 @@ void Sudoku::transform()
             break;
         case 2:
             cin >> judge[1] >> judge[2];
-            Sudoku::swapRow(judge[1] , judge[2];
+            Sudoku::swapRow(judge[1] , judge[2]);
             break;
         case 3:
             cin >> judge[1] >> judge[2];
@@ -140,6 +140,7 @@ void Sudoku::rotate(int x)
 }
 void Sudoku::flip(int x)
 {
+    
 }
 void Sudoku::move_from_temp()
 {
