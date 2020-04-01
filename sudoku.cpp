@@ -107,8 +107,6 @@ void Sudoku::swapNum(int x, int y)
 
 void Sudoku::swapRow(int x, int y)
 {
-    x = x - 1;
-    y = y - 1;
     int temp;
     for (int sR = 0; sR < 9; sR++)
     {
@@ -120,8 +118,6 @@ void Sudoku::swapRow(int x, int y)
 
 void Sudoku::swapCol(int x, int y)
 {
-    x = x - 1;
-    y = y - 1;
     int temp;
     for (int sC = 0; sC < 9; sC++)
     {
