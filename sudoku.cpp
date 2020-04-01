@@ -70,11 +70,11 @@ void Sudoku::transform()
             break;
         case 2:
             cin >> judge[1] >> judge[2];
-            Sudoku::swapRow(judge[1] , judge[2]);
+            Sudoku::swapRow(judge[1], judge[2]);
             break;
         case 3:
             cin >> judge[1] >> judge[2];
-            Sudoku::swapCol(judge[1] , judge[2]);
+            Sudoku::swapCol(judge[1], judge[2]);
             break;
         case 4:
             cin >> judge[1];
@@ -88,7 +88,7 @@ void Sudoku::transform()
             break;
         }
         for (int tem = 0; tem < NUM_SUDOKU; tem++)
-        Sudoku::move_from_temp();
+            Sudoku::move_from_temp();
     }
     return;
 }
@@ -102,7 +102,9 @@ void Sudoku::swapNum(int x, int y)
         if (_sudoku[sN] == y)
             _temp_sudoku[sN] = x;
     }
+    return;
 }
+
 void Sudoku::swapRow(int x, int y)
 {
     x = x - 1;
@@ -113,7 +115,9 @@ void Sudoku::swapRow(int x, int y)
         _temp_sudoku[x + 9 * sR] = _sudoku[y + 9 * sR];
         _temp_sudoku[y + 9 * sR] = _sudoku[x + 9 * sR];
     }
+    return;
 }
+
 void Sudoku::swapCol(int x, int y)
 {
     x = x - 1;
@@ -124,7 +128,9 @@ void Sudoku::swapCol(int x, int y)
         _temp_sudoku[x + sC] = _sudoku[x + 9 * y];
         _temp_sudoku[x + 9 * y] = _sudoku[x + sC];
     }
+    return;
 }
+
 void Sudoku::rotate(int x)
 {
     for (int a = 0; a < x; a++)
@@ -133,20 +139,60 @@ void Sudoku::rotate(int x)
         {
             int row = ro / 9;
             int col = ro % 9;
-            _temp_sudoku[ro]=_sudoku[row+9*(9-col-1)];
+            _temp_sudoku[ro] = _sudoku[row + 9 * (9 - col - 1)];
         }
-        Sudoku::move_from_temp();
+        move_from_temp();
     }
+    return;
 }
+
 void Sudoku::flip(int x)
 {
-    
+    switch (x)
+    {
+    case 0: //up-down flip
+        ud_flip();
+        break;
+
+    case 1: //left-right flip
+        lr_flip();
+        break;
+    default:
+        break;
+    }
+    move_from_temp();
+    return;
 }
+
 void Sudoku::move_from_temp()
 {
     for (int tem = 0; tem < NUM_SUDOKU; tem++)
     {
         _sudoku[tem] = _temp_sudoku[tem];
     }
-    Sudoku::move_from_temp();
+    return;
+}
+
+void Sudoku::ud_flip()
+{
+    for (int udf = 0; udf < NUM_SUDOKU; udf++)
+    {
+        int x = udf / 9;
+        int y = udf % 9;
+        _temp_sudoku[udf] = _sudoku[9 * (9 - 1 - x) + y];
+    }
+    move_from_temp();
+    return;
+}
+
+void Sudoku::lr_flip()
+{
+    for (int udf = 0; udf < NUM_SUDOKU; udf++)
+    {
+        int x = udf / 9;
+        int y = udf % 9;
+        _temp_sudoku[udf] = _sudoku[9 * x + (9 - 1 - y)];
+    }
+    move_from_temp();
+    return;
 }
