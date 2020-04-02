@@ -239,12 +239,72 @@ void Sudoku::before_recursive()
         return;
     }
     //step 2:unique solution.
-    //move_to_temp();
-    //unique_solution();
+    move_to_3D_array();
+    unique_solution();
 }
-
+void Sudoku::move_to_3D_array()
+{
+    for (int a = 0; a < SUDOKU_9; a++)
+    {
+        for (int b = 0; b < SUDOKU_9; b++)
+        {
+            _unique_fill[a][b][0] = _sudoku[a * 9 + b];
+            for (int c = 1; c <= SUDOKU_9; c++)
+                _unique_fill[a][b][c] = c;
+        }
+    }
+} //in this func every point save array[a]={_sudoku[a],1,2,3,4,5,6,7,8,9}
 void Sudoku::unique_solution()
 {
+
+    for (int a = 0; a < SUDOKU_9; a++)
+    {
+        for (int b = 0; b < SUDOKU_9; b++)
+        {
+            if (_unique_fill[a][b][0] != 0)
+                return; //have number which is nonzero.
+            //column
+            for (int c = 0; c < SUDOKU_9; c++)
+            {
+                if (_unique_fill[a][c][0] != 0 && c != b)
+                {
+                    int temp = _unique_fill[a][c][0];
+                    _unique_fill[a][c][temp] = 0;
+                }
+            }
+            //row
+            for (int c = 0; c < SUDOKU_9; c++)
+            {
+                if (_unique_fill[c][b][0] != 0 && c != a)
+                {
+                    int temp = _unique_fill[c][b][0];
+                    _unique_fill[c][b][temp] = 0;
+                }
+            }
+            //cube
+            int ror = (a / 3) * 3;
+            int coc = (b / 3) * 3;
+            for (int c = ror; c < ror + 3; c++)
+            {
+                for (int d = coc; d < coc + 3; d++)
+                {
+                    if (_unique_fill[c][d][0] != 0 && c != a && d != b)
+                    {
+                        int temp = _unique_fill[c][d][0];
+                        _unique_fill[c][d][temp] = 0;
+                    }
+                }
+            }
+        }
+    }
+    //one solution
+    for (int a = 0; a < SUDOKU_9; a++)
+    {
+        for (int b = 0; b < SUDOKU_9; b++)
+        {
+            if (_unique_fill[a][b][0] != 0);
+        }
+    }
 }
 
 bool Sudoku::solve(Sudoku question)
@@ -258,7 +318,9 @@ bool Sudoku::solve(Sudoku question)
         {
             solve_answer[tem] = _sudoku[tem];
         }
+        printf("in solve\n");
         return true;
+        
     }
     else
     {
@@ -325,6 +387,7 @@ bool Sudoku::check(int index, int num)
 
 bool Sudoku::anti_solve(Sudoku question)
 {
+    printf("here!!!!!!!\n");
     int firstZero;
     firstZero = getFirstZeroIndex();
     if (firstZero == -1)

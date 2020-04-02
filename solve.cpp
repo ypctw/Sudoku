@@ -16,10 +16,11 @@ int main()
             ques.print_table();
         }
         else
-            cout << "2" << endl;
+            cout << "2\n" << endl;
     }
     else
-        cout << "0" << endl;
+        cout << "0\n" << endl;
+    ques.print_table();
     return 0;
 }
 bool many_answer(Sudoku ques)
