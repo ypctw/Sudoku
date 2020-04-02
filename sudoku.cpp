@@ -106,22 +106,48 @@ void Sudoku::swapNum(int x, int y)
 
 void Sudoku::swapRow(int x, int y)
 {
-    for (int sR = 0; sR < 9; sR++)
+    if (x > y)
     {
-        _temp_sudoku[x + 9 * sR] = _sudoku[y + 9 * sR];
-        _temp_sudoku[y + 9 * sR] = _sudoku[x + 9 * sR];
+        int temp = x;
+        x = y;
+        y = temp;
     }
-    return;
+    for (int Row = 0; Row < 3; Row++)
+    {
+        for (int sR = 0; sR < 9; sR++)
+        {
+            _temp_sudoku[sR + 27 * x + 9 * Row] = _sudoku[sR + 27 * y + 9 * Row];
+            _temp_sudoku[sR + 27 * y + 9 * Row] = _sudoku[sR + 27 * x + 9 * Row];
+        }
+    }
+    int no_change = 3 - x - y;
+    for (int noc = 0; noc < 27; noc++)
+    {
+        _temp_sudoku[noc + no_change * 27] = _sudoku[noc + no_change * 27];
+    }
 }
-
 void Sudoku::swapCol(int x, int y)
 {
-    for (int sC = 0; sC < 9; sC++)
+    if (x > y)
     {
-        _temp_sudoku[x + sC] = _sudoku[x + sC + 9 * y];
-        _temp_sudoku[x + sC + 9 * y] = _sudoku[x + sC];
+        int temp = x;
+        x = y;
+        y = temp;
     }
-    return;
+    for (int Col = 0; Col < 3; Col++)
+    {
+        for (int sC = 0; sC < 9; sC++)
+        {
+            _temp_sudoku[9 * sC + Col + 3 * x] = _sudoku[9 * sC + Col + 3 * y];
+            _temp_sudoku[9 * sC + Col + 3 * y] = _sudoku[9 * sC + Col + 3 * x];
+        }
+    }
+    int no_change = 3 - x - y;
+    for (int noc = 0; noc < 3; noc++)
+    {
+        for (int sC = 0; sC < 9; sC++)
+            _temp_sudoku[9 * sC + noc + 3 * no_change] = _sudoku[9 * sC + noc + 3 * no_change];
+    }
 }
 
 void Sudoku::rotate(int x)
@@ -153,7 +179,6 @@ void Sudoku::flip(int x)
     default:
         break;
     }
-    move_from_temp();
     return;
 }
 
@@ -174,7 +199,6 @@ void Sudoku::ud_flip()
         int y = udf % 9;
         _temp_sudoku[udf] = _sudoku[9 * (9 - 1 - x) + y];
     }
-    move_from_temp();
     return;
 }
 
@@ -186,6 +210,5 @@ void Sudoku::lr_flip()
         int y = udf % 9;
         _temp_sudoku[udf] = _sudoku[9 * x + (9 - 1 - y)];
     }
-    move_from_temp();
     return;
 }
