@@ -60,10 +60,12 @@ void Sudoku::print_table()
 {
     for (int n = 0; n < NUM_SUDOKU; n++)
     {
-        cout << _sudoku[n] << " ";
+        if ((n + 1) % 9 != 0)
+            cout << _sudoku[n] << " ";
         if ((n + 1) % 9 == 0)
-            cout << "endl";
+            cout << _sudoku[n] << endl;
     }
+    return;
 }
 void Sudoku::transform()
 {
@@ -225,7 +227,6 @@ void Sudoku::lr_flip()
 void Sudoku::before_recursive()
 {
     //step 1:check number is more than 16.
-    printf("in before_recursive");
     int count = 0;
     for (int solve = 0; solve < NUM_SUDOKU; solve++)
     {
@@ -248,11 +249,11 @@ void Sudoku::unique_solution()
 
 bool Sudoku::solve(Sudoku question)
 {
-    printf("in solve");
+    printf("in solve\n");
     int firstZero;
     firstZero = getFirstZeroIndex();
     if (firstZero == -1)
-    { 
+    {
         for (int tem = 0; tem < NUM_SUDOKU; tem++)
         {
             solve_answer[tem] = _sudoku[tem];

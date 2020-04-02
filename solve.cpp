@@ -7,7 +7,7 @@ int main()
     ques.input_Sudoku_table();
     ques.before_recursive();
 
-    if (ques.solve(ques) == true)
+    if (ques.solve(ques))
     {
         ques.anti_solve(ques);
         if (many_answer)
