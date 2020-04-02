@@ -1,21 +1,34 @@
 #include "sudoku.h"
-bool solve(Sudoku question,Sudoku & answer);
-int getFirstZeroIndex();
-void setElement(int index,int value);
-
+bool many_answer(Sudoku ques);
 int main()
 {
     Sudoku ques;
-    Sudoku ans;
     ques.input_Sudoku_table();
     ques.before_recursive();
 
-    if(solve(ques,ans)==true)
+    if (ques.solve(ques) == true)
     {
-        cout <<"1\n";
-        ans.print_table();
+        ques.anti_solve(ques);
+        if (many_answer)
+        {
+            cout << "1\n";
+            ques.print_table();
+        }
+        else
+            cout << "2" << endl;
     }
     else
-        cout <<"0\n";
+        cout << "0" << endl;
     return 0;
+}
+bool many_answer(Sudoku ques)
+{
+    for (int a = 0; a < NUM_SUDOKU; a++)
+    {
+        if (ques.solve_answer[a] != ques.solve_compare[a])
+        {
+            return false;
+        }
+    }
+    return true;
 }

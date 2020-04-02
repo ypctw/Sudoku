@@ -60,9 +60,9 @@ void Sudoku::print_table()
 {
     for (int n = 0; n < NUM_SUDOKU; n++)
     {
-        cout<<_sudoku[n]<<" ";
+        cout << _sudoku[n] << " ";
         if ((n + 1) % 9 == 0)
-            cout<<"endl";
+            cout << "endl";
     }
 }
 void Sudoku::transform()
@@ -245,19 +245,26 @@ void Sudoku::unique_solution()
 {
 }
 
-bool Sudoku::solve(Sudoku question, Sudoku &answer)
+bool Sudoku::solve(Sudoku question)
 {
     int firstZero;
     firstZero = getFirstZeroIndex();
     if (firstZero == -1)
-    { //end condition
+    { 
+        for (int tem = 0; tem < NUM_SUDOKU; tem++)
+        {
+            solve_answer[tem] = _sudoku[tem];
+        }
+        return true;
     }
     else
     {
         for (int num = 1; num <= 9; num++)
         {
+            if (question.check(firstZero, num) != true)
+                break;
             question.setElement(firstZero, num);
-            if (solve(question, answer))
+            if (solve(question))
                 return true;
         }
         return false;
@@ -273,4 +280,68 @@ int Sudoku::getFirstZeroIndex()
         if (_sudoku[i] == 0)
             return i;
     return -1;
+}
+bool Sudoku::check(int index, int num)
+{
+    int row = index / 9;
+    int col = index % 9;
+    //row
+    for (int a = 0; a < 9; a++)
+    {
+        if (num == _sudoku[9 * a + col])
+            return false;
+        if (a == row)
+            a++;
+    }
+
+    //column
+    for (int a = 0; a < 9; a++)
+    {
+        if (num == _sudoku[9 * row + a])
+            return false;
+        if (a == col)
+            a++;
+    }
+    //cube
+    int ror = (row / 3) * 3;
+    int coc = (col % 3) * 3;
+    for (int a = ror; a < ror + 3; a++)
+    {
+        for (int b = coc; b < coc + 3; b++)
+        {
+            if (num == _sudoku[a * 9 + b])
+                return false;
+            if (b = col)
+                b++;
+        }
+        if (a = row)
+            a++;
+    }
+    return true;
+}
+
+bool Sudoku::anti_solve(Sudoku question)
+{
+    int firstZero;
+    firstZero = getFirstZeroIndex();
+    if (firstZero == -1)
+    {
+        for (int tem = 0; tem < NUM_SUDOKU; tem++)
+        {
+            solve_compare[tem] = _sudoku[tem];
+        }
+        return true; //end condition
+    }
+    else
+    {
+        for (int num = 9; num >= 1; num--)
+        {
+            if (question.check(firstZero, num) != true)
+                break;
+            question.setElement(firstZero, num);
+            if (anti_solve(question))
+                return true;
+        }
+        return false;
+    }
 }

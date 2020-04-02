@@ -41,9 +41,13 @@ public:
     // solve
     void before_recursive();
     void unique_solution();
-    bool solve(Sudoku question,Sudoku & answer);
+    void setElement(int index, int value);
+
+    bool solve(Sudoku question);
+    bool anti_solve(Sudoku question);
+    bool check(int index,int num);
+
     int getFirstZeroIndex();
-    void setElement(int index,int value);
 private:
 };
 
