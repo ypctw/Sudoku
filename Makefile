@@ -1,10 +1,6 @@
-generate:generate.o sudoku.o
+run:generate.o sudoku.o transform.o solve.o
 	g++ -o generate generate.o sudoku.o
-
-transform:transform.o sudoku.o
 	g++ -o transform generate.o sudoku.o
-
-solve:solve.o sudoku.o
 	g++ -O3 -o solve solve.o sudoku.o
 
 sudoku.o:sudoku.cpp sudoku.h
