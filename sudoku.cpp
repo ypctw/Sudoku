@@ -35,9 +35,24 @@ void Sudoku::input_Sudoku_table()
         int k = i * 9;
         cin >> _sudoku[k] >> _sudoku[k + 1] >> _sudoku[k + 2] >> _sudoku[k + 3] >> _sudoku[k + 4] >> _sudoku[k + 5] >> _sudoku[k + 6] >> _sudoku[k + 7] >> _sudoku[k + 8];
     }
-    for (int temp = 0; temp < NUM_SUDOKU; temp++)
+    move_to_temp();
+    return;
+}
+
+void Sudoku::move_from_temp()
+{
+    for (int tem = 0; tem < NUM_SUDOKU; tem++)
     {
-        _temp_sudoku[temp] = _sudoku[temp];
+        _sudoku[tem] = _temp_sudoku[tem];
+    }
+    return;
+}
+
+void Sudoku::move_to_temp()
+{
+    for (int tem = 0; tem < NUM_SUDOKU; tem++)
+    {
+        _temp_sudoku[tem] = _sudoku[tem];
     }
     return;
 }
@@ -182,15 +197,6 @@ void Sudoku::flip(int x)
     return;
 }
 
-void Sudoku::move_from_temp()
-{
-    for (int tem = 0; tem < NUM_SUDOKU; tem++)
-    {
-        _sudoku[tem] = _temp_sudoku[tem];
-    }
-    return;
-}
-
 void Sudoku::ud_flip()
 {
     for (int udf = 0; udf < NUM_SUDOKU; udf++)
@@ -211,4 +217,30 @@ void Sudoku::lr_flip()
         _temp_sudoku[udf] = _sudoku[9 * x + (9 - 1 - y)];
     }
     return;
+}
+
+void Sudoku::solve()
+{
+    //step 1:check number is more than 16.
+    int count = 0;
+    for (int solve = 0; solve < NUM_SUDOKU; solve++)
+    {
+        if (_sudoku[solve] != 0)
+            count++;
+    }
+    if (count < 17)
+    {
+        cout << "2\n";
+        return;
+    }
+    //step 2:unique solution.
+    move_to_temp();
+    unique_solution();
+    //step 3:recursive
+
+}
+
+void Sudoku::unique_solution()
+{
+
 }

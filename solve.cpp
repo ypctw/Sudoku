@@ -1,6 +1,8 @@
+#include "sudoku.h"
 int main()
 {
-    // finish your solve code...
-
+    Sudoku SudokuSolve;
+    SudokuSolve.input_Sudoku_table();
+    SudokuSolve.solve();
     return 0;
 }

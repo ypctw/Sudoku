@@ -1,5 +1,4 @@
 #include "sudoku.h"
-#include <iostream>
 int main()
 {
     Sudoku sudokuGen;
