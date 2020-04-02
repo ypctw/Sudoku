@@ -28,7 +28,6 @@ public:
     void transform();
     void move_to_temp();
     void move_from_temp();
-    void print_table();
 
     void swapNum(int x, int y);
     void swapRow(int x, int y);
@@ -52,7 +51,7 @@ public:
     bool check(int index,int num);
 
     int getFirstZeroIndex();
-    
+
 private:
 };
 

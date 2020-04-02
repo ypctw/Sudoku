@@ -3,6 +3,7 @@ bool many_answer(Sudoku ques);
 int main()
 {
     Sudoku ques;
+    
     ques.input_Sudoku_table();
     ques.before_recursive();
 

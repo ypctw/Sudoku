@@ -225,6 +225,7 @@ void Sudoku::lr_flip()
 void Sudoku::before_recursive()
 {
     //step 1:check number is more than 16.
+    printf("in before_recursive");
     int count = 0;
     for (int solve = 0; solve < NUM_SUDOKU; solve++)
     {
@@ -237,8 +238,8 @@ void Sudoku::before_recursive()
         return;
     }
     //step 2:unique solution.
-    move_to_temp();
-    unique_solution();
+    //move_to_temp();
+    //unique_solution();
 }
 
 void Sudoku::unique_solution()
@@ -247,6 +248,7 @@ void Sudoku::unique_solution()
 
 bool Sudoku::solve(Sudoku question)
 {
+    printf("in solve");
     int firstZero;
     firstZero = getFirstZeroIndex();
     if (firstZero == -1)

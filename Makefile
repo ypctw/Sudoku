@@ -1,6 +1,6 @@
 all:generate.o sudoku.o transform.o solve.o
 	g++ -o generate generate.o sudoku.o
-	g++ -o transform generate.o sudoku.o
+	g++ -o transform transform.o sudoku.o
 	g++ -O3 -o solve solve.o sudoku.o
 
 sudoku.o:sudoku.cpp sudoku.h
@@ -17,6 +17,4 @@ solve.o:solve.cpp sudoku.h
 
 clean:
 	rm *.o
-	rm solve
-	rm transform
-	rm generate
+	rm *.exe
