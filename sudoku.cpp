@@ -56,7 +56,15 @@ void Sudoku::move_to_temp()
     }
     return;
 }
-
+void Sudoku::print_table()
+{
+    for (int n = 0; n < NUM_SUDOKU; n++)
+    {
+        cout<<_sudoku[n]<<" ";
+        if ((n + 1) % 9 == 0)
+            cout<<"endl";
+    }
+}
 void Sudoku::transform()
 {
     int judge[3];
@@ -69,12 +77,7 @@ void Sudoku::transform()
         */
         if (judge[0] == 0)
         {
-            for (int n = 0; n < NUM_SUDOKU; n++)
-            {
-                printf("%d ", _sudoku[n]);
-                if ((n + 1) % 9 == 0)
-                    printf("\n");
-            }
+            print_table();
             break;
         }
         switch (judge[0])
@@ -219,7 +222,7 @@ void Sudoku::lr_flip()
     return;
 }
 
-void Sudoku::solve()
+void Sudoku::before_recursive()
 {
     //step 1:check number is more than 16.
     int count = 0;
@@ -236,11 +239,38 @@ void Sudoku::solve()
     //step 2:unique solution.
     move_to_temp();
     unique_solution();
-    //step 3:recursive
-
 }
 
 void Sudoku::unique_solution()
 {
+}
 
+bool Sudoku::solve(Sudoku question, Sudoku &answer)
+{
+    int firstZero;
+    firstZero = getFirstZeroIndex();
+    if (firstZero == -1)
+    { //end condition
+    }
+    else
+    {
+        for (int num = 1; num <= 9; num++)
+        {
+            question.setElement(firstZero, num);
+            if (solve(question, answer))
+                return true;
+        }
+        return false;
+    }
+}
+void Sudoku::setElement(int index, int value)
+{
+    _sudoku[index] = value;
+}
+int Sudoku::getFirstZeroIndex()
+{
+    for (int i = 0; i < NUM_SUDOKU; i++)
+        if (_sudoku[i] == 0)
+            return i;
+    return -1;
 }
