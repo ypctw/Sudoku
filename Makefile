@@ -1,4 +1,4 @@
-run:generate.o sudoku.o transform.o solve.o
+all:generate.o sudoku.o transform.o solve.o
 	g++ -o generate generate.o sudoku.o
 	g++ -o transform generate.o sudoku.o
 	g++ -O3 -o solve solve.o sudoku.o

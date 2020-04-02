@@ -16,6 +16,7 @@ public:
     int _sudoku[NUM_SUDOKU];
     int _temp_sudoku[NUM_SUDOKU];
     int _unique_fill[9][9][9];
+
     //print table
     void print_table();
 
@@ -39,6 +40,9 @@ public:
     void lr_flip();
 
     // solve
+    int solve_answer[NUM_SUDOKU];
+    int solve_compare[NUM_SUDOKU];
+
     void before_recursive();
     void unique_solution();
     void setElement(int index, int value);
@@ -48,6 +52,7 @@ public:
     bool check(int index,int num);
 
     int getFirstZeroIndex();
+    
 private:
 };
 
