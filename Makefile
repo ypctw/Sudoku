@@ -17,4 +17,6 @@ solve.o:solve.cpp sudoku.h
 
 clean:
 	rm *.o
-	rm *.exe
+	rm solve
+	rm transform
+	rm generate
