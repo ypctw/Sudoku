@@ -16,7 +16,6 @@ public:
     Sudoku();
     int _sudoku[NUM_SUDOKU];
     int _temp_sudoku[NUM_SUDOKU];
-    int _unique_fill[SUDOKU_9][SUDOKU_9][10];
 
     //print table
     void print_table();
@@ -40,24 +39,19 @@ public:
     void lr_flip();
 
     // solve
-    int solve_answer[NUM_SUDOKU];
-    int solve_compare[NUM_SUDOKU];
+    int _3D_sudoku[SUDOKU_9][SUDOKU_9][10];
+    void s_input_Sudoku_2D();
+    void s_output_Sudoku_2D();
+    bool s_solve(int num);
+    bool s_check(int num, int x, int y);
+    bool s_number_of_zero();
+    int s_searchFirstZero();
+    void s_human_solution();
+    void s_fill_in(int x, int y);
+    void s_find_the_only();
 
-    void before_recursive();
-    void unique_solution();
-    void setElement(int index, int value);
-    void move_to_3D_array();
-    bool solve(Sudoku question);
-    bool anti_solve(Sudoku question);
-    bool check(int index,int num);
-
-
-
-
-
-    int getFirstZeroIndex();
+    int count;
 
 private:
 };
-
 #endif // SUDOKU_H

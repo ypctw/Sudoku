@@ -1,36 +1,29 @@
 #include "sudoku.h"
-bool many_answer(Sudoku ques);
-int main()
-{
+int main(){
     Sudoku ques;
-    
-    ques.input_Sudoku_table();
-    ques.before_recursive();
-
-    if (ques.solve(ques))
-    {
-        ques.anti_solve(ques);
-        if (many_answer)
-        {
-            cout << "1\n";
-            ques.print_table();
-        }
-        else
-            cout << "2\n" << endl;
+    ques.s_input_Sudoku_2D();
+    //number of zero
+    if (!ques.s_number_of_zero()){
+        cout << "2" << endl;
+        return 0;
+    }
+    //fill what number can be put
+    /*
+    ques.s_human_solution();
+    */
+    int temp= ques.s_searchFirstZero();
+    if(temp==81){
+        cout << "1" << endl;
+        ques.s_output_Sudoku_2D();
+    }
+    if (ques.s_solve(temp)){
+        cout << "1" << endl;
+        ques.s_output_Sudoku_2D();
     }
     else
-        cout << "0\n" << endl;
-    ques.print_table();
+        cout << "0" << endl;
+    cout<<ques.count<<endl;
     return 0;
 }
-bool many_answer(Sudoku ques)
-{
-    for (int a = 0; a < NUM_SUDOKU; a++)
-    {
-        if (ques.solve_answer[a] != ques.solve_compare[a])
-        {
-            return false;
-        }
-    }
-    return true;
-}
+
+
