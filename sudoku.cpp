@@ -281,9 +281,9 @@ void Sudoku::s_find_the_only(){
     }
 }
 
-/* 
+/**************** 
 original
-bool Sudoku::s_solve(int num){
+ * bool Sudoku::s_solve(int num){
     num = s_searchFirstZero();
     //printf("x=%d,y=%d\n",x,y);
     if (num == 81)
@@ -301,17 +301,17 @@ bool Sudoku::s_solve(int num){
         _3D_sudoku[num / 9][num % 9][0] = 0;
     }
     //failed
-    return false;
-}
-*/
-//online
+    return false;}
+**************/
 
-bool Sudoku::s_solve(int num){
+void Sudoku::s_solve(int num){
     count++;
     printf("num= %d\n",num);
-    if (num == 81)
-        return true;
-        
+    if (num == 81){
+        cout<<"1"<<endl;
+        s_output_Sudoku_2D();
+        exit(1);
+    }    
     //pass the number is zero
     if (_3D_sudoku[num / 9][num % 9][0] == 0){ 
         //check this place
@@ -319,15 +319,17 @@ bool Sudoku::s_solve(int num){
             _3D_sudoku[num / 9][num % 9][0] = in;
             if (s_check(in, num / 9, num % 9))
                 //success
-                if(s_solve(num+1))
-                    return true;
+                s_solve(num+1);
         }
         _3D_sudoku[num / 9][num % 9][0] = 0;
     }
-    else
+    else{
         s_solve(num+1);
+        printf("in else\n");
+    }
+    printf("i am here\n");
 }
-
+//check this place can put this number
 bool Sudoku::s_check(int num,int x,int y){
     //x-axis
     for(int a=0;a<SUDOKU_9;a++)

@@ -16,6 +16,7 @@ int main(){
         cout << "1" << endl;
         ques.s_output_Sudoku_2D();
     }
+    /*
     if (ques.s_solve(temp)){
         cout << "1" << endl;
         ques.s_output_Sudoku_2D();
@@ -23,6 +24,9 @@ int main(){
     else
         cout << "0" << endl;
     cout<<ques.count<<endl;
+    */
+    ques.s_solve(temp-1);
+    printf("i am here\n");
     return 0;
 }
 
