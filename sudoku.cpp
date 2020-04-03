@@ -305,12 +305,10 @@ original
 **************/
 
 void Sudoku::s_solve(int num){
-    count++;
-    printf("num= %d\n",num);
     if (num == 81){
         cout<<"1"<<endl;
         s_output_Sudoku_2D();
-        exit(1);
+        exit(0);
     }    
     //pass the number is zero
     if (_3D_sudoku[num / 9][num % 9][0] == 0){ 
@@ -323,11 +321,8 @@ void Sudoku::s_solve(int num){
         }
         _3D_sudoku[num / 9][num % 9][0] = 0;
     }
-    else{
+    else
         s_solve(num+1);
-        printf("in else\n");
-    }
-    printf("i am here\n");
 }
 //check this place can put this number
 bool Sudoku::s_check(int num,int x,int y){

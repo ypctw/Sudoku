@@ -29,5 +29,3 @@ int main(){
     printf("i am here\n");
     return 0;
 }
-
-
