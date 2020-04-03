@@ -9,8 +9,9 @@ Sudoku::Sudoku(){
     }
     Sudoku::count =0;
 }
-//generate
-void Sudoku::generate(){
+
+void Sudoku::generate()
+{//generate
     int gen_sudoku[NUM_SUDOKU] = {
         0, 4, 0, 2, 1, 0, 0, 0, 0,
         8, 0, 7, 0, 0, 0, 0, 9, 0,
@@ -27,8 +28,9 @@ void Sudoku::generate(){
             printf("\n");
     }
 }
-//transform 存入一維陣列
-void Sudoku::input_Sudoku_table(){
+
+void Sudoku::input_Sudoku_table()
+{//transform 存入一維陣列
     for (int i = 0; i < 9; i++){
         int k = i * 9;
         cin >> _sudoku[k] >> _sudoku[k + 1] >> _sudoku[k + 2] >> _sudoku[k + 3] >> _sudoku[k + 4] >> _sudoku[k + 5] >> _sudoku[k + 6] >> _sudoku[k + 7] >> _sudoku[k + 8];
@@ -36,14 +38,16 @@ void Sudoku::input_Sudoku_table(){
     move_to_temp();
     return;
 }
-//transform 暫存
-void Sudoku::move_to_temp(){
+
+void Sudoku::move_to_temp()
+{//transform 暫存
     for (int tem = 0; tem < NUM_SUDOKU; tem++)
         _temp_sudoku[tem] = _sudoku[tem];
     return;
 }
-//transform 主要function
-void Sudoku::transform(){
+
+void Sudoku::transform()
+{//transform 主要function
     int judge[3];
     while (1){
         cin >> judge[0];
@@ -79,14 +83,16 @@ void Sudoku::transform(){
     }
     return;
 }
-//transform 自暫存輸入
-void Sudoku::move_from_temp(){
+
+void Sudoku::move_from_temp()
+{//transform 自暫存輸入
     for (int tem = 0; tem < NUM_SUDOKU; tem++)
         _sudoku[tem] = _temp_sudoku[tem];
     return;
 }
-//transform 輸出陣列
-void Sudoku::print_table(){
+
+void Sudoku::print_table()
+{//transform 輸出陣列
     for (int n = 0; n < NUM_SUDOKU; n++){
         if ((n + 1) % 9 != 0)
             cout << _sudoku[n] << " ";
@@ -95,8 +101,9 @@ void Sudoku::print_table(){
     }
     return;
 }
-//transform 換數字
-void Sudoku::swapNum(int x, int y){
+
+void Sudoku::swapNum(int x, int y)
+{//transform 換數字
     for (int sN = 0; sN < NUM_SUDOKU; sN++){
         if (_sudoku[sN] == x)
             _temp_sudoku[sN] = y;
@@ -105,8 +112,9 @@ void Sudoku::swapNum(int x, int y){
     }
     return;
 }
-//transform 換行
-void Sudoku::swapRow(int x, int y){
+
+void Sudoku::swapRow(int x, int y)
+{//transform 換行
     if (x > y){
         int temp = x;
         x = y;
@@ -122,8 +130,9 @@ void Sudoku::swapRow(int x, int y){
     for (int noc = 0; noc < 27; noc++)
         _temp_sudoku[noc + no_change * 27] = _sudoku[noc + no_change * 27];
 }
-//transform 換列
-void Sudoku::swapCol(int x, int y){
+
+void Sudoku::swapCol(int x, int y)
+{//transform 換列
     if (x > y){
         int temp = x;
         x = y;
@@ -141,8 +150,9 @@ void Sudoku::swapCol(int x, int y){
             _temp_sudoku[9 * sC + noc + 3 * no_change] = _sudoku[9 * sC + noc + 3 * no_change];
     }
 }
-//transform 旋轉
-void Sudoku::rotate(int x){
+
+void Sudoku::rotate(int x)
+{//transform 旋轉
     for (int a = 0; a < x; a++){
         for (int ro = 0; ro < NUM_SUDOKU; ro++){
             int row = ro / 9;
@@ -153,8 +163,9 @@ void Sudoku::rotate(int x){
     }
     return;
 }
-//transform 翻轉
-void Sudoku::flip(int x){
+
+void Sudoku::flip(int x)
+{//transform 翻轉
     switch (x)
     {
     case 0: //up-down flip
@@ -169,8 +180,9 @@ void Sudoku::flip(int x){
     }
     return;
 }
-//transform 上下翻轉
-void Sudoku::ud_flip(){
+
+void Sudoku::ud_flip()
+{//transform 上下翻轉
     for (int udf = 0; udf < NUM_SUDOKU; udf++){
         int x = udf / 9;
         int y = udf % 9;
@@ -178,8 +190,9 @@ void Sudoku::ud_flip(){
     }
     return;
 }
-//transform 左右翻轉
-void Sudoku::lr_flip(){
+
+void Sudoku::lr_flip()
+{//transform 左右翻轉
     for (int udf = 0; udf < NUM_SUDOKU; udf++){
         int x = udf / 9;
         int y = udf % 9;
@@ -188,25 +201,28 @@ void Sudoku::lr_flip(){
     return;
 }
 /**********************
- * solve
+*solve
 ***********************/
-//input by keyboard
-void Sudoku::s_input_Sudoku_2D(){
+
+void Sudoku::s_input_Sudoku_2D()
+{//input by keyboard
     for (int i = 0; i < 9; i++)
         for (int j = 0; j < 9; j++)
             cin >>_3D_sudoku[i][j][0];
     return;
 }
-//output to terminal
-void Sudoku::s_output_Sudoku_2D(){
+
+void Sudoku::s_output_Sudoku_2D()
+{//output to terminal
     for (int i = 0; i < 9; i++){
         for (int j = 0; j < 8; j++)
             cout << _3D_sudoku[i][j][0]<<" ";
         cout<<_3D_sudoku[i][8][0]<<endl;
     }
 }
-//how many spaces are zero.
-bool Sudoku::s_number_of_zero(){
+
+bool Sudoku::s_number_of_zero()
+{//how many spaces are zero.
     //空格大於65
     int zero = 0;
     for (int i = 0; i < NUM_SUDOKU; i++)
@@ -216,15 +232,17 @@ bool Sudoku::s_number_of_zero(){
         return false;
     return true;
 }
-//find first zero
-int Sudoku::s_searchFirstZero(){
+
+int Sudoku::s_searchFirstZero()
+{//find first zero
     for(int a=0;a<NUM_SUDOKU;a++)
         if(_3D_sudoku[a/9][a%9][0]==0)
             return a;
     return 81;
 }
-//before recursive
-void Sudoku::s_human_solution(){
+
+void Sudoku::s_human_solution()
+{//before recursive
     for (int i = 0; i < NUM_SUDOKU; i++){
         if(_3D_sudoku[i/9][i%9][0]==0)
             s_fill_in(i/9,i%9);
@@ -234,8 +252,9 @@ void Sudoku::s_human_solution(){
         s_find_the_only();
     }
 }
-//find which can be filled in
-void Sudoku::s_fill_in(int x,int y){
+
+void Sudoku::s_fill_in(int x,int y)
+{//find which can be filled in
     //if I enter this function, _3D_sudoku[x][y][0]=0
     //row&column
     for(int a=0;a<SUDOKU_9;a++){
@@ -249,8 +268,9 @@ void Sudoku::s_fill_in(int x,int y){
             _3D_sudoku[x][y][_3D_sudoku[a][b][0]]=0;
     return;
 }
-//find the only one answer lattice
-void Sudoku::s_find_the_only(){
+
+void Sudoku::s_find_the_only()
+{//find the only one answer lattice
     for (int a = 0; a < NUM_SUDOKU; a++){
         //find where is zero
         if (_3D_sudoku[a / 9][a % 9][0] != 0)
@@ -324,8 +344,9 @@ void Sudoku::s_solve(int num){
     else
         s_solve(num+1);
 }
-//check this place can put this number
-bool Sudoku::s_check(int num,int x,int y){
+
+bool Sudoku::s_check(int num,int x,int y)
+{//check this place can put this number
     //x-axis
     for(int a=0;a<SUDOKU_9;a++)
         if(a!=x)
