@@ -239,8 +239,8 @@ void Sudoku::before_recursive()
         return;
     }
     //step 2:unique solution.
-    move_to_3D_array();
-    unique_solution();
+    //move_to_3D_array();
+    //unique_solution();
 }
 void Sudoku::move_to_3D_array()
 {
@@ -302,14 +302,15 @@ void Sudoku::unique_solution()
     {
         for (int b = 0; b < SUDOKU_9; b++)
         {
-            if (_unique_fill[a][b][0] != 0);
+            if (_unique_fill[a][b][0] != 0)
+                break;
+            for(int c =1;c<1+SUDOKU_9;c++){}
         }
     }
 }
 
 bool Sudoku::solve(Sudoku question)
 {
-    printf("in solve\n");
     int firstZero;
     firstZero = getFirstZeroIndex();
     if (firstZero == -1)
@@ -318,7 +319,6 @@ bool Sudoku::solve(Sudoku question)
         {
             solve_answer[tem] = _sudoku[tem];
         }
-        printf("in solve\n");
         return true;
         
     }

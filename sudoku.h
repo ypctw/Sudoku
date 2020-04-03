@@ -51,6 +51,10 @@ public:
     bool anti_solve(Sudoku question);
     bool check(int index,int num);
 
+
+
+
+
     int getFirstZeroIndex();
 
 private:
