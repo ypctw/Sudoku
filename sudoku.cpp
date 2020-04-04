@@ -249,9 +249,6 @@ void Sudoku::s_human_solution()
         if(_3D_sudoku[i/9][i%9][0]==0)
             s_fill_in(i/9,i%9);
     s_while();
-    for (int i = 0; i < NUM_SUDOKU; ++i){
-        s_find_the_only();
-    }
     return;
 }
 
