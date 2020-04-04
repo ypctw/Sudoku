@@ -1,13 +1,15 @@
 #ifndef SUDOKU_H
 #define SUDOKU_H
 
-#include <iostream>
 #include <cstdio>
+
+#include <iostream>
 #include <algorithm>
-using namespace std;
+
 #define NUM_SUDOKU 81
 #define SUDOKU_9 9
 
+using namespace std;
 /***************************************************
  * Finish your .cpp according to this header file. *
  * You can modify this file if needed.             *

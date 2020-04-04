@@ -15,8 +15,8 @@ int main(){
     ques.s_human_solution();
     */
    //copy
-    for (int a = 0; a < NUM_SUDOKU; a++)
-        for(int b=0;b<10;b++)
+    for (int a = 0; a < NUM_SUDOKU; ++a)
+        for(int b=0;b<10;++b)
             ques._trans_3D_sudoku[a / 9][a % 9][b]=ques._3D_sudoku[a / 9][a % 9][b];
     
     int temp= ques.s_searchFirstZero();
