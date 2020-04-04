@@ -4,10 +4,11 @@ Sudoku::Sudoku(){
     for (int i = 0; i < NUM_SUDOKU; i++){
         Sudoku::_sudoku[i] = 0;
         Sudoku::_temp_sudoku[i] = 0;
-        for(int z=1;z<10;z++)
-            Sudoku::_3D_sudoku[i/9][i%9][z]=z;    
+        for(int z=0;z<10;z++)
+            Sudoku::_3D_sudoku[i/9][i%9][z]=z;
+        for(int z=0;z<10;z++)
+            Sudoku::_trans_3D_sudoku[i/9][i%9][z]=z;    
     }
-    Sudoku::count =0;
 }
 
 void Sudoku::generate()
@@ -302,8 +303,7 @@ void Sudoku::s_find_the_only()
 }
 
 /**************** 
-original
- * bool Sudoku::s_solve(int num){
+original * bool Sudoku::s_solve(int num){
     num = s_searchFirstZero();
     //printf("x=%d,y=%d\n",x,y);
     if (num == 81)
@@ -324,12 +324,12 @@ original
     return false;}
 **************/
 
-void Sudoku::s_solve(int num){
+bool Sudoku::s_solve(int num){
     if (num == 81){
         cout<<"1"<<endl;
         s_output_Sudoku_2D();
         exit(0);
-    }    
+    }
     //pass the number is zero
     if (_3D_sudoku[num / 9][num % 9][0] == 0){ 
         //check this place
@@ -343,6 +343,7 @@ void Sudoku::s_solve(int num){
     }
     else
         s_solve(num+1);
+    return false;
 }
 
 bool Sudoku::s_check(int num,int x,int y)
@@ -369,3 +370,36 @@ bool Sudoku::s_check(int num,int x,int y)
         }      
     return true;
 }
+/*
+bool Sudoku::s_trans_s_solve(int num){
+    if (num == 81){
+       
+        if(s_double_solution()){
+                cout<<"1"<<endl;
+                s_output_Sudoku_2D();
+                exit(0);
+            }
+            cout<<"2"<<endl;
+            exit(0);
+    }    
+    //pass the number is zero
+    if (_trans_3D_sudoku[num / 9][num % 9][0] == 0){ 
+        //check this place
+        for (int in = 10; in > 0; in++){
+            _trans_3D_sudoku[num / 9][num % 9][0] = in;
+            if (s_check(in, num / 9, num % 9))
+                s_solve(num-1);
+        }
+        _trans_3D_sudoku[num / 9][num % 9][0] = 0;
+    }
+    else
+        s_solve(num-1);
+}
+
+bool Sudoku::s_double_solution(){
+    for (int i = 0; i < NUM_SUDOKU; i++)
+        if(_3D_sudoku[i/9][i%9][0] != _trans_3D_sudoku[i/9][i%9][0])
+            return false;
+    return true;
+}
+*/

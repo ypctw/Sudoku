@@ -43,17 +43,21 @@ public:
 
     // solve
     int _3D_sudoku[SUDOKU_9][SUDOKU_9][10];
+    int _trans_3D_sudoku[SUDOKU_9][SUDOKU_9][10];
     int s_searchFirstZero();
 
-    void s_solve(int num);
+    bool s_solve(int num);
     bool s_check(int num, int x, int y);
     bool s_number_of_zero();
+    bool s_trans_s_solve(int num);
+    bool s_double_solution();
 
     void s_input_Sudoku_2D();
     void s_output_Sudoku_2D();
     void s_human_solution();
     void s_fill_in(int x, int y);
     void s_find_the_only();
+    void true_answer();
 
     int count;
 
