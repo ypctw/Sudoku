@@ -1,6 +1,7 @@
 #include "sudoku.h"
-//initialization
-Sudoku::Sudoku(){
+
+Sudoku::Sudoku()
+{//initialization
     for (int i = 0; i < NUM_SUDOKU; ++i){
         Sudoku::_sudoku[i] = 0;
         Sudoku::_temp_sudoku[i] = 0;
@@ -244,14 +245,14 @@ int Sudoku::s_searchFirstZero()
 
 void Sudoku::s_human_solution()
 {//before recursive
-    for (int i = 0; i < NUM_SUDOKU; ++i){
+    for (int i = 0; i < NUM_SUDOKU; ++i)
         if(_3D_sudoku[i/9][i%9][0]==0)
             s_fill_in(i/9,i%9);
-        continue;
-    }
+    s_while();
     for (int i = 0; i < NUM_SUDOKU; ++i){
         s_find_the_only();
     }
+    return;
 }
 
 void Sudoku::s_fill_in(int x,int y)
@@ -259,8 +260,8 @@ void Sudoku::s_fill_in(int x,int y)
     //if I enter this function, _3D_sudoku[x][y][0]=0
     //row&column
     for(int a=0;a<SUDOKU_9;++a){
-        _3D_sudoku[x][y][_3D_sudoku[x][a][0]]=0;
-        _3D_sudoku[x][y][_3D_sudoku[a][y][0]]=0;
+            _3D_sudoku[x][y][_3D_sudoku[x][a][0]]=0;
+            _3D_sudoku[x][y][_3D_sudoku[a][y][0]]=0;
     }
     //cube
     x=(x/3)*3,y=(y/3)*3;
@@ -270,8 +271,19 @@ void Sudoku::s_fill_in(int x,int y)
     return;
 }
 
-void Sudoku::s_find_the_only()
+void Sudoku::s_while(){
+    while(1)
+        if(s_find_the_only==false && s_find_3_way==false)
+            break;
+    return;
+}
+
+bool Sudoku::s_find_3_way(){
+
+}
+bool Sudoku::s_find_the_only()
 {//find the only one answer lattice
+    int last_zero=s_LastZero();
     for (int a = 0; a < NUM_SUDOKU; ++a){
         //find where is zero
         if (_3D_sudoku[a / 9][a % 9][0] != 0)
@@ -281,13 +293,20 @@ void Sudoku::s_find_the_only()
         for (int b = 1; b < 10; ++b)
             if (_3D_sudoku[a / 9][a % 9][b] != 0)
                 temp--;
-        int now = 0;
+        //找到該值且為最後一個0
+        if(a==last_zero&&temp!=1)
+            return false;
+        //有複數個解
         if (temp != 1)
-            break;
+            continue;
+        //找到該值
+        int now = 0;
         for (now = 1; now < 10; ++now)
             if (_3D_sudoku[a / 9][a % 9][now] != 0)
                 break;
+        //紀錄該值到now
         _3D_sudoku[a / 9][a % 9][0] = now;
+        //把上下能去掉的數值歸零
         //row&column
         for (int a = 0; a < SUDOKU_9; ++a){
             _3D_sudoku[a / 9][a % 9][now] = 0;
@@ -300,8 +319,15 @@ void Sudoku::s_find_the_only()
             for (int d = y; d < y + 3; ++d)
                 _3D_sudoku[c][d][now] = 0;
     }
+    //正常結束
+    return true;
 }
-
+int Sudoku::s_LastZero(){
+    for(int a=80;a>=0;--a)
+        if(_3D_sudoku[a/9][a%9][0]==0)
+            return a;
+    return 81;
+}
 /**************** 
 original * bool Sudoku::s_solve(int num){
     num = s_searchFirstZero();
@@ -324,7 +350,8 @@ original * bool Sudoku::s_solve(int num){
     return false;}
 **************/
 
-bool Sudoku::s_solve(int num){
+bool Sudoku::s_solve(int num)
+{//back tracing
     if (num == 81){
         cout<<"1"<<endl;
         s_output_Sudoku_2D();
@@ -370,8 +397,10 @@ bool Sudoku::s_check(int num,int x,int y)
         }      
     return true;
 }
-/*
-bool Sudoku::s_trans_s_solve(int num){
+
+
+
+/*bool Sudoku::s_trans_s_solve(int num){
     if (num == 81){
        
         if(s_double_solution()){
@@ -394,12 +423,10 @@ bool Sudoku::s_trans_s_solve(int num){
     }
     else
         s_solve(num-1);
-}
-
-bool Sudoku::s_double_solution(){
+}*/
+/* bool Sudoku::s_double_solution(){
     for (int i = 0; i < NUM_SUDOKU; ++i)
         if(_3D_sudoku[i/9][i%9][0] != _trans_3D_sudoku[i/9][i%9][0])
             return false;
     return true;
-}
-*/
+}*/
