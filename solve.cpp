@@ -25,9 +25,8 @@ int main(){
         ques.s_output_Sudoku_2D();
     }
     //no solution
-    ques.s_solve(temp-1);
+    ques.s_solve(0);
 
     cout<<"0"<<endl;
-    
     return 0;
 }
