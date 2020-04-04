@@ -26,7 +26,6 @@ int main(){
     }
     //no solution
     ques.s_solve(0);
-
     cout<<"0"<<endl;
     return 0;
 }
