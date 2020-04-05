@@ -60,6 +60,7 @@ public:
 	bool s_find_row(int row, int col);
 	bool s_find_cube(int row, int col);
 	void update(int num, int row, int col);
+	bool no_solution();
 
 	//step 4 : check should we go into the recursive function?
 	int s_searchFirstZero();
