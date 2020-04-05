@@ -45,7 +45,7 @@ public:
 
     //solve
     int _3D_sudoku[SUDOKU_9][SUDOKU_9][10];
-    int _trans_3D_sudoku[SUDOKU_9][SUDOKU_9][10];
+    //int _trans_3D_sudoku[SUDOKU_9][SUDOKU_9][10];
 
     //step 1 : fill in
     void s_input_Sudoku_2D();
@@ -56,6 +56,10 @@ public:
     //step 3 : before recursive
     void s_human_solution();
     int s_LastZero();
+    bool s_find_col(int row, int col);
+    bool s_find_row(int row, int col);
+    bool s_find_cube(int row, int col);
+    void update(int num, int row, int col);
 
     //step 4 : check should we go into the recursive function?
     int s_searchFirstZero();
