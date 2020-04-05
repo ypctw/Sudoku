@@ -13,8 +13,6 @@ int main(){
     //fill what number can be put
 
     ques.s_human_solution();
-	cout << endl;
-	ques.s_output_Sudoku_2D();
    //copy
     /*for (int a = 0; a < NUM_SUDOKU; ++a)
         for(int b=0;b<10;++b)
@@ -27,8 +25,10 @@ int main(){
 		return 0;
     }
     //no solution
-    if(ques.s_solve(0))
+    if(ques.s_solve(0)){
         cout<<"1"<<endl;
+        ques.s_output_Sudoku_2D();
+    }
     else
         cout << "0" << endl;
     return 0;
