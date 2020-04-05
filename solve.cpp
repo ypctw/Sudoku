@@ -13,6 +13,7 @@ int main(){
     //fill what number can be put
 
     ques.s_human_solution();
+    
    //copy
     /*for (int a = 0; a < NUM_SUDOKU; ++a)
         for(int b=0;b<10;++b)
